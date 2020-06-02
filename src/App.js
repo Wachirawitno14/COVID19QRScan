@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './App.css';
 import firebase from './Firebase';
-
+import QRCode from 'qrcode.react';
 class App extends React.Component {
 
     constructor(props) {

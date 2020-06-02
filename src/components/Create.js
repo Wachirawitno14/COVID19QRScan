@@ -1,7 +1,7 @@
 import React from 'react';
 import firebase from '../Firebase';
 import { Link } from 'react-router-dom';
-
+import QRCode from 'qrcode.react';
 class Create extends React.Component {
 
     constructor(props) {
@@ -11,6 +11,7 @@ class Create extends React.Component {
             place: '',
             address: '',
             time: '',
+            qrRef: '',
         }
     }
 
@@ -25,12 +26,13 @@ class Create extends React.Component {
 
         e.preventDefault();
 
-        const { place, address, time } = this.state;
+        const { place, address, time,qrRef } = this.state;
 
         this.ref.add({
             place,
             address,
-            time
+            time,
+            qrRef,
         })
             .then((docRef) => {
 
@@ -39,6 +41,7 @@ class Create extends React.Component {
                     place: '',
                     address: '',
                     time: '',
+                    qrRef: '',
                 });
 
 
@@ -58,25 +61,28 @@ class Create extends React.Component {
                 <div className="panel panel-default">
                     <div className="panel-heading">
                         <h3 className="panel-title">
-                            ADD Place
+                           เพิ่มสถานที่
                         </h3>
                     </div>
                     <div className="panel-body">
-                        <h4><Link to="/">Place List</Link></h4>
+                        <h4><Link to="/">รายชื่อสถานที่</Link></h4>
                         <form onSubmit={this.onSubmit}>
                             <div className="form-group">
-                                <label htmlFor="place">Place:</label>
+                                <label htmlFor="place">สถานที่:</label>
                                 <input type="text" className="form-control" name="place" value={place} onChange={this.onChange} placeholder="place" />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="address">Address:</label>
+                                <label htmlFor="address">ที่อยู่:</label>
                                 <textarea className="form-control" name="address" onChange={this.onChange} placeholder="Address" cols="80" rows="3" value={address}></textarea>
                             </div>
                             <div className="form-group">
-                                <label htmlFor="time">Time:</label>
+                                <label htmlFor="time">เวลา:</label>
                                 <input type="text" className="form-control" name="time" value={time} onChange={this.onChange} placeholder="Time" />
                             </div>
-                            <button type="submit" className="btn btn-success">Submit</button>
+                            <div className="form-group">
+                            <QRCode value={place} />
+                            </div> 
+                            <button type="submit" className="btn btn-success">บันทึก</button>
                         </form>
                     </div>
                 </div>

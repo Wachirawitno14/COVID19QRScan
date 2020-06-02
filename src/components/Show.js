@@ -31,7 +31,7 @@ class Show extends React.Component {
     }
 
     delete = (id) => {
-        firebase.firestore().collection('boards').doc(id).delete()
+        firebase.firestore().collection('Place').doc(id).delete()
             .then(() => {
                 console.log("Document successfully deleted!")
                 this.props.history.push("/");
@@ -46,20 +46,20 @@ class Show extends React.Component {
             <div className="container">
                 <div className="panel panel-default">
                     <div className="panel-heading">
-                        <h4><Link to="/">Place list</Link></h4>
+                        <h4><Link to="/">แสดงรายชื่อสถานที่</Link></h4>
                         <h3 className="panel-title">
                             {this.state.place.place}
                         </h3>
                     </div>
                     <div className="panel-body">
                         <dl>
-                            <dt>Address:</dt>
+                            <dt>ที่อยู่:</dt>
                             <dd>{this.state.place.address}</dd>
-                            <dt>Time:</dt>
+                            <dt>เวลา:</dt>
                             <dd>{this.state.place.time}</dd>
                         </dl>
-                        <Link to={`/edit/${this.state.key}`} className="btn btn-success">Edit</Link>
-                        <button onClick={() => this.delete(this.state.key)} className="btn btn-danger">Delete</button>
+                        <Link to={`/edit/${this.state.key}`} className="btn btn-success">แก้ไข</Link>
+                        <button onClick={() => this.delete(this.state.key)} className="btn btn-danger">ลบ</button>
                     </div>
                 </div>
             </div>
