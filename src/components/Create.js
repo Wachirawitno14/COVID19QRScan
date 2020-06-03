@@ -1,7 +1,6 @@
 import React from 'react';
 import firebase from '../Firebase';
-import { Link } from 'react-router-dom';
-import QRCode from 'qrcode.react';
+import { Link } from 'react-router-dom';;
 class Create extends React.Component {
 
     constructor(props) {
@@ -79,9 +78,6 @@ class Create extends React.Component {
                                 <label htmlFor="time">เวลา:</label>
                                 <input type="text" className="form-control" name="time" value={time} onChange={this.onChange} placeholder="Time" />
                             </div>
-                            <div className="form-group">
-                            <QRCode value={place} />
-                            </div> 
                             <button type="submit" className="btn btn-success">บันทึก</button>
                         </form>
                     </div>

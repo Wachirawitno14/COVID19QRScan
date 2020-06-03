@@ -39,6 +39,7 @@ class App extends React.Component {
         this.unsubscribe();
     }
 
+
     render() {
         return (
             <div className="container">
@@ -55,7 +56,6 @@ class App extends React.Component {
                                 <tr>
                                     <th>ชื่อสถานที่</th>
                                     <th>ที่อยู่</th>
-                                    <th>เวลา</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -63,7 +63,8 @@ class App extends React.Component {
                                     <tr key={Place.key}>
                                         <td><Link to={`/show/${Place.key}`}>{Place.place}</Link></td>
                                         <td>{Place.address}</td>
-                                        <td>{Place.time}</td>
+                                        <td><QRCode  value={Place.place}></QRCode></td>
+                                        
                                     </tr>
                                 )}
                             </tbody>
@@ -74,5 +75,6 @@ class App extends React.Component {
         );
     }
 }
+
 
 export default App;

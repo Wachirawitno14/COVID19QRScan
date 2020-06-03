@@ -1,6 +1,7 @@
 import React from 'react';
 import firebase from '../Firebase';
 import { Link } from 'react-router-dom';
+import QRCode from 'qrcode.react';
 
 class Show extends React.Component {
 
@@ -55,16 +56,36 @@ class Show extends React.Component {
                         <dl>
                             <dt>ที่อยู่:</dt>
                             <dd>{this.state.place.address}</dd>
-                            <dt>เวลา:</dt>
-                            <dd>{this.state.place.time}</dd>
+                            <dt>QR Code:</dt>
+                            <dd><QRCode id="1" value={this.state.place} ></QRCode></dd>
                         </dl>
+                       <div>
+                       <button type="submit" className="btn btn-success" onClick={downloadQR}>บันทึก QR Code</button> 
+                       <br />
+                       </div> 
+                       <div >
+                       <br />
                         <Link to={`/edit/${this.state.key}`} className="btn btn-success">แก้ไข</Link>
+                        &nbsp; &nbsp; &nbsp; 
                         <button onClick={() => this.delete(this.state.key)} className="btn btn-danger">ลบ</button>
                     </div>
                 </div>
             </div>
+        </div>
         );
     }
 }
 
+const downloadQR = () => {
+    const canvas = document.getElementById("1");
+    const pngUrl = canvas
+      .toDataURL("image/png")
+      .replace("image/png", "image/octet-stream");
+    let downloadLink = document.createElement("a");
+    downloadLink.href = pngUrl;
+    downloadLink.download = "QR.png";
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+  };
 export default Show;
